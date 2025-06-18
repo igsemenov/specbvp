@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Modules — specbvp documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <link rel="stylesheet" href="docpage.css">
+    <script src="docpage.js"></script>
+</head>
+
+<body>
+
+    <div id="top-panel">
+        <div id="page-logo"></div>
+        <div id="top-panel-tool-bar">
+            <div id="global-toc-btn" class="top-panel-btn" onclick="switchTOC(this)"></div>
+            <div id="local-toc-btn" class="top-panel-btn" onclick="switchTOC(this)"></div>
+            <div id="home-page-btn" class="top-panel-btn" onclick="gotoHomePage()"></div>
+        </div>
+    </div>
+
+    <div id="global-toc-box" class="toc-box">
+        <div class="toc-box__header">
+            <p>Contents</p><button onclick="closeTOC(this)">&#x2715;</button>
+        </div>
+        <div id="global-toc-box__text" class="toc-box__textbox"></div>
+    </div>
+    <div id="local-toc-box" class="toc-box">
+        <div class="toc-box__header">
+            <p>On this page</p><button onclick="closeTOC(this)">&#x2715;</button>
+        </div>
+        <div id="local-toc-box__text" class="toc-box__textbox">
+            <p>
+            <ul>
+                <li><a href="#specbvp.polybases">specbvp.polybases</a>
+                    <ul>
+                        <li><a href="#polybasis">PolyBasis</a>
+                            <ul>
+                                <li><a href="#polys">polys()</a></li>
+                                <li><a href="#derivs">derivs()</a></li>
+                                <li><a href="#integax">integax()</a></li>
+                                <li><a href="#integxb">integxb()</a></li>
+                                <li><a href="#nodes">nodes()</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#polyopr">PolyOpr</a>
+                            <ul>
+                                <li><a href="#setnodes">setnodes()</a></li>
+                                <li><a href="#setpolys">setpolys()</a></li>
+                                <li><a href="#asdict">asdict()</a></li>
+                                <li><a href="#asmat">asmat()</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#nodeset">NodeSet</a>
+                            <ul>
+                                <li><a href="#setnum">setnum()</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#legendre">Legendre</a></li>
+                        <li><a href="#chebyshev">Chebyshev</a></li>
+                    </ul>
+                </li>
+            </ul>
+            </p>
+        </div>
+    </div>
+
+    <div id="content-box">
+        <div id="title-box">
+            <h1 id="title-box__title"></h1>
+            <h2 id="title-box__annotation"></h2>
+            <hr>
+        </div>
+        <div id="doc-box">
+<div class="toc-anchor"></div><h1>specbvp.polybases</h1>
+
+<p>Polynomial bases.</p>
+
+<div class="toc-anchor"></div><h2>PolyBasis</h2>
+
+<pre class="py-sign"><b><em>class</em></b> specbvp.polybases.<b>PolyBasis</b>()</pre>
+
+<p>ABC for a polynomial basis.</p>
+
+<p>
+<ul class="md-list">
+    <li>Returns <em>operators</em> derived from <code>PolyOpr</code>.</li>
+    <li>Returns <em>node sets</em> derived from <code>NodeSet</code>.</li>
+</ul>
+</p>
+
+<div class="toc-anchor"></div><h3>polys()</h3>
+
+<pre class="py-sign">PolyBasis.<b>polys</b>(<em>self</em>)</pre>
+
+<p>Returns an <em>operator</em> that evaluates polynomials.</p>
+
+<div class="toc-anchor"></div><h3>derivs()</h3>
+
+<pre class="py-sign">PolyBasis.<b>derivs</b>(<em>self</em>, order)</pre>
+
+<p>Returns an <em>operator</em> that differentiates polynomials.</p>
+
+<p><b>Parameters</b></p>
+
+<p><span class="vardef"><code>order</code> : <em>int</em></span></p>
+
+<dl><dd>
+  Order of the desired derivative starting from one.
+</dd></dl>
+
+<div class="toc-anchor"></div><h3>integax()</h3>
+
+<pre class="py-sign">PolyBasis.<b>integax</b>(<em>self</em>, weighted=<span>False</span>)</pre>
+
+<p>Returns an <em>operator</em> that integrates polynomials over <code>[a,x]</code>.</p>
+
+<p><b>Parameters</b></p>
+
+<p><span class="vardef"><code>weighted</code> : <em>bool = False</em></span></p>
+
+<dl><dd>
+  Polynomials are multiplied by <code>x</code>, if <em>True</em>.
+</dd></dl>
+
+<div class="toc-anchor"></div><h3>integxb()</h3>
+
+<pre class="py-sign">PolyBasis.<b>integxb</b>(<em>self</em>, weighted=<span>False</span>)</pre>
+
+<p>Returns an <em>operator</em> that integrates polynomials over <code>[x,b]</code>.</p>
+
+<p><b>Parameters</b></p>
+
+<p><span class="vardef"><code>weighted</code> : <em>bool = False</em></span></p>
+
+<dl><dd>
+  Polynomials are multiplied by <code>x</code>, if <em>True</em>.
+</dd></dl>
+
+<div class="toc-anchor"></div><h3>nodes()</h3>
+
+<pre class="py-sign">PolyBasis.<b>nodes</b>(<em>self</em>) → <em>dict</em></pre>
+
+<p>Returns a dictionary with the available node sets.</p>
+
+<div class="toc-anchor"></div><h2>PolyOpr</h2>
+
+<pre class="py-sign"><b><em>class</em></b> specbvp.polybases.<b>PolyOpr</b>()</pre>
+
+<p>ABC for operators on a polynomial sequence.</p>
+
+<div class="toc-anchor"></div><h3>setnodes()</h3>
+
+<pre class="py-sign">PolyOpr.<b>setnodes</b>(<em>self</em>, nodes)</pre>
+
+<p>Defines the output points and returns the instance.</p>
+
+<p><b>Parameters</b></p>
+
+<p><span class="vardef"><code>nodes</code> : <em>number | array-like</em></span></p>
+
+<dl><dd>
+  Collocation point(s) within <code>[a,b]</code>.
+</dd></dl>
+
+<p><b>Returns</b></p>
+
+<p><span class="vardef"><em>self</em></span></p>
+
+<dl><dd>
+  The instance itself.
+</dd></dl>
+
+<div class="toc-anchor"></div><h3>setpolys()</h3>
+
+<pre class="py-sign">PolyOpr.<b>setpolys</b>(<em>self</em>, *indices)</pre>
+
+<p>Defines a polynomial sequence and returns the instance.</p>
+
+<p><b>Parameters</b></p>
+
+<p><span class="vardef"><code>indices</code> : <em>*int</em></span></p>
+
+<dl><dd>
+  Indices of the polynomials to include.
+</dd></dl>
+
+<p><b>Returns</b></p>
+
+<p><span class="vardef"><em>self</em></span></p>
+
+<dl><dd>
+  The instance itself.
+</dd></dl>
+
+<div class="toc-anchor"></div><h3>asdict()</h3>
+
+<pre class="py-sign">PolyOpr.<b>asdict</b>(<em>self</em>) → <em>dict</em></pre>
+
+<p>Realizes the operator as an index-to-output mapping.</p>
+
+<p><b>Returns</b></p>
+
+<p><span class="vardef"><em>dict</em></span></p>
+
+<dl><dd>
+  Maps the indices of polynomials to the output values.
+</dd></dl>
+
+<div class="toc-anchor"></div><h3>asmat()</h3>
+
+<pre class="py-sign">PolyOpr.<b>asmat</b>(<em>self</em>)</pre>
+
+<p>Realizes the operator as a Vandermonde-like matrix.</p>
+
+<p><b>Returns</b></p>
+
+<p><span class="vardef"><em>ndarray</em></span></p>
+
+<dl><dd>
+  The operator as a Vandermonde-like matrix (a).
+</dd></dl>
+
+<p>(a) Columns are images of the polynomials tabulated at the nodes.</p>
+
+<div class="toc-anchor"></div><h2>NodeSet</h2>
+
+<pre class="py-sign"><b><em>class</em></b> specbvp.polybases.<b>NodeSet</b>()</pre>
+
+<p>Set of nodes associated with a polynomials basis.</p>
+
+<p>
+<ul class="md-list">
+    <li>Represents a set of distinct points in <code>[a,b]</code>.</li>
+    <li>May hold weights of the accompanying quadrature rule.</li>
+</ul>
+</p>
+
+<p><b>Attributes</b></p>
+
+<p><span class="vardef"><code>nodes</code> : <em>ndarray</em></span></p>
+
+<dl><dd>
+  Points as a flat numpy array.
+</dd></dl>
+
+<p><span class="vardef"><code>weights</code> : <em>ndarray | None</em></span></p>
+
+<dl><dd>
+  Weights as a flat numpy array, if any.
+</dd></dl>
+
+<div class="toc-anchor"></div><h3>setnum()</h3>
+
+<pre class="py-sign">NodeSet.<b>setnum</b>(<em>self</em>, number)</pre>
+
+<p>Defines the number of points and returns the instance.</p>
+
+<p><b>Parameters</b></p>
+
+<p><span class="vardef"><code>size</code> : <em>int</em></span></p>
+
+<dl><dd>
+  Number of nodes.
+</dd></dl>
+
+<p><b>Returns</b></p>
+
+<p><span class="vardef"><em>self</em></span></p>
+
+<dl><dd>
+  The instance itself.
+</dd></dl>
+
+<div class="toc-anchor"></div><h2>Legendre</h2>
+
+<pre class="py-sign"><b><em>class</em></b> specbvp.polybases.<b>Legendre</b>()</pre>
+
+<p>Basis formed by the Legendre polynomials.</p>
+
+<div class="toc-anchor"></div><h2>Chebyshev</h2>
+
+<pre class="py-sign"><b><em>class</em></b> specbvp.polybases.<b>Chebyshev</b>()</pre>
+
+<p>Basis formed by the Chebyshev polynomials of the 1st kind.</p>
+
+<hr>
+        </div>
+        <p id="footnote">Copyright &copy; 2023, Igor Semenov.</p>
+    </div>
+
+    <footer></footer>
+
+    <script>
+        setDocPage();
+    </script>
+
+</body>
+
+</html>
